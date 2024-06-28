@@ -1,22 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd
-http://www.w3.org/2001/XMLSchema-instance ">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <!-- Existing configuration -->
+    <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
     <artifactId>javaProject1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>javaProject1</name>
     <url>http://maven.apache.org</url>
-
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -25,9 +25,10 @@ http://www.w3.org/2001/XMLSchema-instance ">
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,6 +38,8 @@ http://www.w3.org/2001/XMLSchema-instance ">
                     <target>17</target>
                 </configuration>
             </plugin>
+            
+            <!-- Maven JAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -47,6 +50,16 @@ http://www.w3.org/2001/XMLSchema-instance ">
                             <mainClass>org.example.App</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            
+            <!-- Surefire Plugin for testing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <!-- Optionally configure report directories or other settings -->
                 </configuration>
             </plugin>
         </plugins>
