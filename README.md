@@ -51,9 +51,54 @@
 
 <img width="942" alt="Screenshot 2024-06-29 at 13 50 00" src="https://github.com/darkt2003/jar-project/assets/162579939/ab1e09a3-c6b2-4494-b105-374af3d2c8f9">
 
+משימה 4:
+קובץ הסבר על כל שלב ב-ci 
+<img width="854" alt="Screenshot 2024-06-29 at 14 44 59" src="https://github.com/darkt2003/jar-project/assets/162579939/950cc135-ace9-4f6f-925f-73309dcea37d">
+
+שלב זה עושה checkout לרפוזיטורי ב-git ומשתמש ב-credentials ששמורים ב-credentials כדי להתחבר ל-git 
+
+<img width="321" alt="Screenshot 2024-06-29 at 14 50 29" src="https://github.com/darkt2003/jar-project/assets/162579939/9d961c99-83b9-4b52-8780-69cbd1192c77">
+
+שלב זה בונה את הפרוייקט maven מתוך ה-javaProject.
+ה-dir מציין את המיקום שממנו הפעולות יתבצעו.
+התקנה של כלי mvn ומחיקה של הקימפול הקודם שהתבצע כדי שיהיה אפשר לבצע קומפילציה מחדש בשביל הפרויקט. 
 
 
+<img width="329" alt="Screenshot 2024-06-29 at 14 58 45" src="https://github.com/darkt2003/jar-project/assets/162579939/03aaf9df-6b01-44d8-822e-546d92c57467">
 
+שלב זה מפעיל את הבדיקות לפרוייקט שוב מוחק קבצי קומפילציה ישנים ואז מריץ בדיקות
+
+קובץ הסבר על כל שלב ב-cd:
+
+<img width="492" alt="Screenshot 2024-06-29 at 15 02 21" src="https://github.com/darkt2003/jar-project/assets/162579939/3d9face4-68cf-48dd-9de8-75130955f9a7">
+
+הגדרת משתני סביבה שנוכל להשתמש בהם לכל אורך ה-script
+
+<img width="856" alt="Screenshot 2024-06-29 at 15 04 08" src="https://github.com/darkt2003/jar-project/assets/162579939/350cfe4c-429b-4e3d-849c-229cfaa32547">
+
+התחברות ל-docker hub באמצעות ה-credentials שנשמרו ב-jenkins
+
+<img width="508" alt="Screenshot 2024-06-29 at 15 05 26" src="https://github.com/darkt2003/jar-project/assets/162579939/d6b9cec2-8aa1-4a5a-9c8d-d8320c391a38">
+
+מתוך ה-docker hub repository לעשות docker pull ל-image המתאים שהועלה לשם.
+
+<img width="668" alt="Screenshot 2024-06-29 at 15 07 58" src="https://github.com/darkt2003/jar-project/assets/162579939/1fedd54b-4280-4c42-921c-e1021ea3fc90">
+
+פריסה של סביבת בדיקה. ראשית, לנקות כל קונטיינר אחר שרץ כדי לאפשר סביבה נקייה. ואז מריץ דוקר חדש ומציין באיזה פורטים.
+
+<img width="728" alt="Screenshot 2024-06-29 at 15 12 15" src="https://github.com/darkt2003/jar-project/assets/162579939/52423b49-a04d-4f91-a2ec-d5acda1a5a5c">
+
+ולבסוף הפעלת בדיקות. שומר את ה-exit code שהופעל במהלך הריצה של הקונטיינר ובודק האם היו שגיאות. 
+
+<img width="434" alt="Screenshot 2024-06-29 at 15 14 39" src="https://github.com/darkt2003/jar-project/assets/162579939/81b8d964-2f3b-4b8d-b502-2013377ec75b">
+
+ואחרי שכל הבדיקות הסתיימו, לנקות את סביבת העבודה, והדפסת הודעה מתאימה
+
+הכלים והטכנולוגיות שהשתמשתי בהם: intellij, docker, jenkins, git...
+
+
+כיצד ניתן לפתור בעיות שעלולות לצוץ בזמן ריצה של ה-pipeline?
+תשובה: יכולות לצוץ בעיות בכל אחד מהשלבים ואפשר לדבג את הקוד באמצעות הוספת echo כדי לקבל תשובה לגבי התקלה ולראות מה היא בדיוק ואיך לתקן אותה. אם יש בעיות שקשורות ל-syntax אז גם כן הן יופיעו אחרי הריצה של ה-pipeline ולוגים כדי להבין מאיפה נובעת הבעיה או למשל קבצים שאפשר להוסיף שיהיה כתוב בהם את התקלות אם ה-pipeline לא מצליח לרוץ טוב.
 
 
 
