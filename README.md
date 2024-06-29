@@ -100,6 +100,24 @@
 כיצד ניתן לפתור בעיות שעלולות לצוץ בזמן ריצה של ה-pipeline?
 תשובה: יכולות לצוץ בעיות בכל אחד מהשלבים ואפשר לדבג את הקוד באמצעות הוספת echo כדי לקבל תשובה לגבי התקלה ולראות מה היא בדיוק ואיך לתקן אותה. אם יש בעיות שקשורות ל-syntax אז גם כן הן יופיעו אחרי הריצה של ה-pipeline ולוגים כדי להבין מאיפה נובעת הבעיה או למשל קבצים שאפשר להוסיף שיהיה כתוב בהם את התקלות אם ה-pipeline לא מצליח לרוץ טוב.
 
+משימת בונוס:
+נתקין helm ונוודא שהוא פועל
+
+<img width="113" alt="Screenshot 2024-06-29 at 21 09 36" src="https://github.com/darkt2003/jar-project/assets/162579939/75ca1195-1b83-4e71-893f-4ec3c5d499df">
+עריכה של הקובץ values.yaml כדי שיקח את האימג׳ מהרפוזיטורי
+<img width="456" alt="Screenshot 2024-06-29 at 21 10 40" src="https://github.com/darkt2003/jar-project/assets/162579939/3c56c54a-28b1-49b2-9975-318c5a468b08">
+
+<img width="381" alt="Screenshot 2024-06-29 at 21 13 50" src="https://github.com/darkt2003/jar-project/assets/162579939/1d1ff4cc-c90e-4896-a84c-d59908f5aa86">
+
+
+יצירה של deployment ובדיקה שהוא רץ:
+
+<img width="938" alt="Screenshot 2024-06-29 at 21 12 52" src="https://github.com/darkt2003/jar-project/assets/162579939/61ef30f3-c4b7-4bc0-a3ab-5639112b2039">
+
+
+
+
+
 
 
 
