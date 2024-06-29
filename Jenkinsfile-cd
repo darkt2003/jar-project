@@ -1,0 +1,76 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'darktz/test-repo:v1.0'
+        DOCKERHUB_CREDENTIALS = credentials('docker-credentials') 
+    }
+
+    stages {
+        stage('Docker Login') {
+            steps {
+                script {
+                    // Retrieve Docker Hub credentials
+                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        // Perform Docker login using username and password
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                    }
+                }
+            }
+        }
+
+        stage('Pull Docker Image') {
+            steps {
+                script {
+                    // Pull Docker image from Docker Hub
+                    docker.withRegistry('', '') {
+                        def app = docker.image("${DOCKER_IMAGE}")
+                        app.pull()
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Testing Environment') {
+            steps {
+                script {
+                    // Stop and remove any existing container named 'jar-project-test'
+                    sh """
+                    docker stop jar-project-test || true
+                    docker rm jar-project-test || true
+
+                    
+                    docker run -d --name jar-project-test -p 8081:8080 ${DOCKER_IMAGE}
+                    """
+                }
+            }
+        }
+
+        stage('Post-Deployment Tests') {
+            steps {
+                script {
+                    // Run the container and capture exit code
+                    def exitCode = sh(script: "docker run --rm ${DOCKER_IMAGE}", returnStatus: true)
+            
+                    if (exitCode != 0) {
+                        error "Container exited with non-zero exit code: ${exitCode}"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs() // Clean up workspace after each run
+        }
+
+        success {
+            echo 'Deployment and tests succeeded!'
+        }
+
+        failure {
+            echo 'Deployment or tests failed!'
+        }
+    }
+}
