@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                    git url: 'https://github.com/darkt2003/jar-project.git', credentialsId: 'github-credentials', branch: 'main'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                dir('javaProject/'){
+                    sh 'mvn clean install'
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                dir('javaProject/'){
+                    sh 'mvn clean test'
+                }
+            }
+        }
+    }
+
+}
